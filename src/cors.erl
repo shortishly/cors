@@ -64,10 +64,10 @@ methods(Allowed) ->
     lists:foldr(
       fun
           (Method, <<>>) ->
-              <<Method>>;
+              <<Method/bytes>>;
 
           (Method, A) ->
-              <<Method/bytes, ", ", A/binary>>
+              <<Method/bytes, ", ", A/bytes>>
       end,
       <<>>,
       Allowed).
