@@ -34,7 +34,7 @@ options(Req, State, Allowed) ->
         #{<<"origin">> := Origin,
           <<"access-control-request-method">> := RequestMethod,
           <<"access-control-request-headers">> := RequestHeaders} ->
-            add_headers(Req, State, Allowed, Origin, RequestMethod, RequestHeaders);
+            add_headers(Req, State, ordsets:from_list(Allowed), Origin, RequestMethod, RequestHeaders);
 
 	#{} ->
 	    {ok, Req, State}
