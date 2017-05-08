@@ -18,7 +18,7 @@
 
 
 allow_origin(Req) ->
-    case headers(Req) of
+    case cowboy_req:headers(Req) of
         #{<<"origin">> := _} ->
 	    cowboy_req:set_resp_header(
               <<"Access-Control-Allow-Origin">>,
@@ -30,7 +30,7 @@ allow_origin(Req) ->
     end.
 
 options(Req, State, Allowed) ->
-    case headers(Req) of
+    case cowboy_req:headers(Req) of
         #{<<"origin">> := Origin,
           <<"access-control-request-method">> := RequestMethod,
           <<"access-control-request-headers">> := RequestHeaders} ->
@@ -71,9 +71,6 @@ methods(Allowed) ->
       end,
       <<>>,
       Allowed).
-
-headers(Req) ->
-    maps:from_list(cowboy_req:headers(Req)).
 
 
 
